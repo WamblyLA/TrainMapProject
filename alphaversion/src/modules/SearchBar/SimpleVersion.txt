@@ -1,0 +1,59 @@
+import React, { useState } from "react";
+// import "./SearchBar.scss";
+import styles from "./SearchBar.module.scss";
+
+const SearchBar = () => {
+  const [from, setFrom] = useState("");
+  const [to, setTo] = useState("");
+  
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const apiUrl = `https://api.rzd.ru/v1.0/search?from=${from}&to=${to}`;
+
+    try {
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error fetching train data:", error);
+    }
+  };
+
+  return (
+    <div className={styles["wrapper"]}>
+    <div className={styles["search-bar"]}>
+      <form onSubmit={handleSearch}>
+        <div className={styles["input-group"]}>
+          <input
+            type="text"
+            placeholder="Откуда"
+            value={from}
+            onChange={(e) => setFrom(e.target.value)}
+            className={styles["input"]}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Куда"
+            className={styles["input"]}
+            value={to}
+            onChange={(e) => setTo(e.target.value)}
+            required
+          />
+        </div>
+        <button type="submit" className={styles["search-btn"]}>Поиск</button>
+      </form>
+    </div>
+    </div>
+  );
+};
+
+export default SearchBar;

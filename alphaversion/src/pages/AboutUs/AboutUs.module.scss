@@ -1,0 +1,18 @@
+$coef: calc(1vw + 1vh);
+* {
+ margin: 0;
+ padding: 0;
+    .text-wrapper {
+        height: 80vh;
+        width: 100vw;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        .main-text {
+            background-color: white;
+            color: #000000;
+            gap: 5%;
+            font-size: calc(coef * .5vw + coef * .5vh);
+        }
+    }
+}
